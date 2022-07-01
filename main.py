@@ -2,9 +2,9 @@ import hikari
 import mangadex
 import lightbulb
 import os
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-#load_dotenv()
+load_dotenv()
 
 def findCoverArt(name):
     api = mangadex.Api()
