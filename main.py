@@ -1,5 +1,5 @@
 import hikari
-from extensions.mangadexAPI import getCoverArtLink
+from extensions.mangaClass import *
 import lightbulb
 import os
 from dotenv import load_dotenv
@@ -11,11 +11,12 @@ Bot = lightbulb.BotApp(
     default_enabled_guilds=(int(os.getenv("DISCORD_SERVER")))
 )
 
-@Bot.listen(hikari.GuildMessageCreateEvent)
-async def listenForManga(event):
+@Bot.listen()
+async def listenForManga(event: hikari.GuildMessageCreateEvent):
     if event.content.startswith("!manga-"):
         try:
-            await event.message.respond(getCoverArtLink(event.content[7:]))
+            manga = Manga(event.content[7:])
+            await event.message.respond(manga.manga_cover_link)
         except:
             await event.message.respond("No cover art")
 
