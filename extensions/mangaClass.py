@@ -33,6 +33,10 @@ class Manga:
                         break
             if has_found:
                 break
+            else:
+                info = info['data'][0]
+                break
+        
             
             
         #id of the manga
@@ -70,3 +74,7 @@ class Manga:
         json_of_cover = requests.get(f"{self.__BASE_URL}/cover/{self.__manga_cover_id}").json()
         self.__manga_cover_file = json_of_cover['data']['attributes']['fileName']
         self.manga_cover_link = f"https://mangadex.org/covers/{self.manga_id}/{self.__manga_cover_file}"
+
+manga = Manga("jujitsu kaisen")
+
+print(manga.titles)
