@@ -16,9 +16,12 @@ async def listenForManga(event: hikari.GuildMessageCreateEvent):
     if event.content.startswith("!manga-"):
         try:
             manga = Manga(event.content[7:])
-            await event.message.respond(manga.manga_cover_link)
+            embedmsg = hikari.Embed(title= manga.titles['en'])
+            embedmsg = embedmsg.set_image(manga.manga_cover_link)
+            await event.message.respond(embedmsg)
+            await event.message.delete()
         except:
-            await event.message.respond("No cover art")
+            await event.message.respond("error")
 
 @Bot.command
 @lightbulb.command("hello", "hello user")
